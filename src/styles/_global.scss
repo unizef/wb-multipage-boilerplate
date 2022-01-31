@@ -1,0 +1,8 @@
+@use "variables";
+
+// DEFAULT STYLES
+body {
+  margin: 0;
+  background-color: variables.$bg;
+  color: var(--text);
+}
