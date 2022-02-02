@@ -1,6 +1,6 @@
-import "./styles/index.scss";
-import sword from "./images/swc-sword.png";
-import swordSvg from "./images/sword.svg";
+import "../styles/index.scss";
+import sword from "../images/swc-sword.png";
+import swordSvg from "../images/sword.svg";
 
 // Create Heading Node
 const heading = document.createElement("h1");

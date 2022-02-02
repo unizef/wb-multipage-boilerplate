@@ -10,8 +10,12 @@ if (process.env.NODE_ENV === "production") {
 
 module.exports = {
   mode: mode,
-  entry: "./src/app.js",
+  entry: {
+    app: "./src/js/app.js",
+    about: "./src/js/about.js",
+  },
   output: {
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "img/[hash][ext][query]",
   },
@@ -55,9 +59,17 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      title: "webpack Boilerplate", // title of index.html
-      template: path.resolve(__dirname, "./src/template.html"), // template file
+      title: "home", // index.html
+      template: path.resolve(__dirname, "./src/index.html"), // template file
       filename: "index.html", // output file
+      chunks: ["app"],
+    }),
+    // second html file linked to about.js
+    new HtmlWebpackPlugin({
+      title: "about", // about.html
+      template: path.resolve(__dirname, "./src/html/about.html"), // template file
+      filename: "about.html", // output file
+      chunks: ["about"],
     }),
   ],
   devtool: "source-map",
