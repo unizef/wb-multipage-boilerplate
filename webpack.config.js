@@ -12,7 +12,7 @@ module.exports = {
   mode: mode,
   entry: {
     app: "./src/js/app.js",
-    about: "./src/js/about.js",
+    // about: "./src/js/about.js",
   },
   output: {
     filename: "[name].js",
@@ -69,14 +69,13 @@ module.exports = {
       title: "about", // about.html
       template: path.resolve(__dirname, "./src/html/about.html"), // template file
       filename: "about.html", // output file
-      chunks: ["about"],
     }),
   ],
   devtool: "source-map",
   devServer: {
     // used to be: contentBase: "./dist",
     static: {
-      directory: path.join(__dirname, "dist/"),
+      directory: path.join(__dirname, "dist"),
     },
     port: 8080,
     // devMiddleware: {

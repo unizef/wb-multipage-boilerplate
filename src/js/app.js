@@ -1,4 +1,6 @@
 import "../styles/index.scss";
+import { fruit, groceries } from "./console";
+
 import sword from "../images/swc-sword.png";
 import swordSvg from "../images/sword.svg";
 
@@ -18,20 +20,6 @@ png.setAttribute("src", sword);
 const svg = document.querySelector(".svg img");
 svg.setAttribute("src", swordSvg);
 
-// Console Example
-const fruit = {
-  mango: 5,
-  jackfruit: 2,
-  banana: 10,
-};
-
+// log example from console.js
 console.log(fruit);
-
-const groceries = {
-  ...fruit,
-  "ficus lyrata": 1,
-  facewash: 2,
-  mirror: 1,
-};
-
 console.log(groceries);

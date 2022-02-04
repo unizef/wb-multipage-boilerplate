@@ -1,5 +1,5 @@
 {
-  "name": "wp-spa-boilerplate",
+  "name": "wp-multipage-boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -11,7 +11,7 @@
     "build-dev": "webpack",
     "clean": "rm -rf dist"
   },
-  "homepage": "https://github.com/unizef/wp-spa-boilerplate#readme",
+  "homepage": "https://github.com/unizef/wb-multipage-boilerplate",
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
