@@ -21,5 +21,5 @@ const svg = document.querySelector(".svg img");
 svg.setAttribute("src", swordSvg);
 
 // log example from console.js
-console.log(fruit);
+console.log(`${fruit}`);
 console.log(groceries);

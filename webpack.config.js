@@ -2,21 +2,32 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const PrettierPlugin = require("prettier-webpack-plugin");
+const srcDir = path.resolve(__dirname, "src");
 
 let mode = "development";
 if (process.env.NODE_ENV === "production") {
   mode = "production";
 }
 
+let htmlPageNames = ["about", "404", "500"];
+let multipleHtmlPlugins = htmlPageNames.map((name) => {
+  return new HtmlWebpackPlugin({
+    template: `${srcDir}/html/${name}.html`,
+    filename:
+      mode === "production" ? `${name}.[contenthash].html` : `${name}.html`,
+  });
+});
+
 module.exports = {
   mode: mode,
   entry: {
-    app: "./src/js/app.js",
+    App: "./src/js/App.js",
     // about: "./src/js/about.js",
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
+    path: `${srcDir}/dist`,
     assetModuleFilename: "img/[hash][ext][query]",
   },
 
@@ -57,30 +68,26 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
+    new PrettierPlugin(),
+    new MiniCssExtractPlugin({
+      filename:
+        mode === "production" ? "[name].[contenthash].css" : "[name].css",
+    }),
+
     new HtmlWebpackPlugin({
       title: "home", // index.html
-      template: path.resolve(__dirname, "./src/index.html"), // template file
-      filename: "index.html", // output file
-      chunks: ["app"],
+      template: `${srcDir}/index.html`, 
+      filename: mode === "production" ? "index.[contenthash].html" : "index.html",
+      chunks: ["App"],
     }),
-    // second html file linked to about.js
-    new HtmlWebpackPlugin({
-      title: "about", // about.html
-      template: path.resolve(__dirname, "./src/html/about.html"), // template file
-      filename: "about.html", // output file
-    }),
-  ],
+  ].concat(multipleHtmlPlugins),
+
   devtool: "source-map",
   devServer: {
-    // used to be: contentBase: "./dist",
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: `${srcDir}/dist`,
     },
     port: 8080,
-    // devMiddleware: {
-    //   publicPath: "https://localhost:8080/dist/",
-    // },
     hot: "only",
   },
 };
