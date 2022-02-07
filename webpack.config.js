@@ -27,8 +27,22 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: `${srcDir}/dist`,
+    // path: `${srcDir}/dist`,
+    path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "img/[hash][ext][query]",
+  },
+  
+  optimization: {
+    runtimeChunk: 'single',
+   splitChunks: {
+     cacheGroups: {
+       vendor: {
+         test: /[\\/]node_modules[\\/]/,
+         name: 'vendors',
+         chunks: 'all',
+       },
+     },
+   },
   },
 
   module: {
